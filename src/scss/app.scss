@@ -1,0 +1,59 @@
+@import "./variable";
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: $font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $text;
+  background: $body;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  display: flex;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+.grit {
+  -webkit-mask-image: url("assets/grit.png");
+  mask-image: url("assets/grit.png");
+}
+
+.btn {
+  display: inline-block;
+  background: rgba($text, 0);
+  border: 2px solid $text;
+  border-radius: 0;
+  appearance: none;
+  box-shadow: none;
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: inherit;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+input[type="text"] {
+  background: transparent;
+  border: none;
+  border-radius: none;
+  display: block;
+  appearance: none;
+  border-bottom: 2px solid $text;
+  width: 100%;
+  font-size: 1.5rem;
+  font-family: inherit;
+  color: $text;
+  outline: none;
+  padding: 5px;
+}

@@ -1,18 +1,41 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <FadeIn>
+      <span class="grit">Let's start</span>
+      <h1 class="grit">Attacking Things</h1>
+      <router-link class="grit btn" :to="statRoute">Get Started</router-link>
+    </FadeIn>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import FadeIn from "@/components/effects/FadeIn.vue";
+
+import { ROUTES } from "@/types/routes";
 
 export default Vue.extend({
   name: "home",
   components: {
-    HelloWorld
-  }
+    FadeIn
+  },
+  data: () => ({
+    statRoute: ROUTES.STATS
+  })
 });
 </script>
+
+<style lang="scss" scoped>
+@import "@/scss/_variable.scss";
+
+.home {
+  width: 100%;
+  span {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+  }
+  h1 {
+    margin: 0 0 40px;
+  }
+}
+</style>
