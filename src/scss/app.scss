@@ -28,6 +28,11 @@ body {
   mask-image: url("assets/grit.png");
 }
 
+h1, h2, h3, h4 {
+  font-family: $fontHeavy;
+  @extend .grit;
+}
+
 .btn {
   display: inline-block;
   background: rgba($text, 0);
