@@ -1,6 +1,6 @@
 import Item from "./Item";
 
-interface Slot {
+export interface Slot {
   item: Item;
   quantity: number;
 }
@@ -48,6 +48,18 @@ class Inventory {
     }
 
     return false;
+  }
+
+  public incrementQuantity(idx: number, by: number = 1): void {
+    if (this.items[idx]) {
+      this.items[idx].quantity += by;
+    }
+  }
+
+  public decreaseQuantity(idx: number, by: number = 1): void {
+    if (this.items[idx]) {
+      this.items[idx].quantity -= by;
+    }
   }
 }
 
