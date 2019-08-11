@@ -37,11 +37,11 @@
 import Vue from "vue";
 import FadeIn from "@/components/effects/FadeIn.vue";
 
-import { MUTATIONS } from "@/store/mutations";
-import { PlayerStats } from "@/types/store";
+import { MUTATIONS } from "@/types/mutations";
+import { Stats } from "@/types/store";
 
 interface PlayerStatsData {
-  stats: PlayerStats[];
+  stats: Stats[];
 }
 
 export default Vue.extend({
@@ -53,10 +53,10 @@ export default Vue.extend({
     stats: ["attack", "defence", "stamina", "magic"]
   }),
   methods: {
-    getStatDetails(key: PlayerStats): number {
+    getStatDetails(key: Stats): number {
       return this.$store.state.player.stats[key];
     },
-    updatePlayerStats(key: PlayerStats, value: number = 1) {
+    updatePlayerStats(key: Stats, value: number = 1) {
       const cur = this.getStatDetails(key);
       if ((value > 0 && cur === 10) || (value < 0 && cur === 0)) {
         return false;
@@ -71,7 +71,7 @@ export default Vue.extend({
         stat: value
       });
     },
-    plusButtonClass(key: PlayerStats): string {
+    plusButtonClass(key: Stats): string {
       const cur = this.getStatDetails(key);
       if (cur === 10 || this.availablePoints === 0) {
         return "hide";
@@ -79,7 +79,7 @@ export default Vue.extend({
 
       return "";
     },
-    minusButtonClass(key: PlayerStats): string {
+    minusButtonClass(key: Stats): string {
       const cur = this.getStatDetails(key);
       if (cur === 0) {
         return "hide";
