@@ -3,6 +3,7 @@ import Vuex, { StoreOptions } from "vuex";
 
 import { MUTATIONS } from "./types/mutations";
 import { RootState, Stats } from "./types/store";
+import Inventory from "@/class/Inventory";
 
 const store: StoreOptions<RootState> = {
   state: {
@@ -14,7 +15,9 @@ const store: StoreOptions<RootState> = {
         stamina: 0,
         magic: 0
       },
-      gold: 100
+      gold: 100,
+      inventory: new Inventory(),
+      hp: 100
     },
     currentLvl: 1
   },
