@@ -30,7 +30,7 @@
 import Vue from "vue";
 import FadeIn from "@/components/effects/FadeIn.vue";
 
-import { MUTATIONS } from "@/store/mutations";
+import { MUTATIONS } from "@/types/mutations";
 
 export default Vue.extend({
   name: "PlayerName",
