@@ -1,4 +1,5 @@
-type Stats = "attack" | "defence" | "stamina" | "magic";
+import { Stats } from "@/types/store";
+
 type EnemyStats = Record<Stats, number>;
 
 class Enemy {

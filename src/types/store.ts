@@ -1,10 +1,12 @@
-export type PlayerStats = "attack" | "defence" | "stamina" | "magic";
+export type Stats = "attack" | "defence" | "stamina" | "magic";
 
 interface Player {
   name: string;
-  stats: Record<PlayerStats, number>;
+  stats: Record<Stats, number>;
+  gold: number;
 }
 
 export interface RootState {
   player: Player;
+  currentLvl: number;
 }

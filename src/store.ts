@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuex, { StoreOptions } from "vuex";
 
-import { MUTATIONS } from "./store/mutations";
-import { RootState, PlayerStats } from "./types/store";
+import { MUTATIONS } from "./types/mutations";
+import { RootState, Stats } from "./types/store";
 
 const store: StoreOptions<RootState> = {
   state: {
@@ -13,8 +13,10 @@ const store: StoreOptions<RootState> = {
         defence: 0,
         stamina: 0,
         magic: 0
-      }
-    }
+      },
+      gold: 100
+    },
+    currentLvl: 1
   },
   mutations: {
     [MUTATIONS.UPDATE_PLAYER_NAME](state, name) {
@@ -22,7 +24,7 @@ const store: StoreOptions<RootState> = {
     },
     [MUTATIONS.UPDATE_PLAYER_STAT](
       state,
-      payload: { key: PlayerStats; stat: number }
+      payload: { key: Stats; stat: number }
     ) {
       state.player.stats[payload.key] += payload.stat;
     }
