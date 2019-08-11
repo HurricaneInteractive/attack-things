@@ -3,6 +3,7 @@ import Item from "./Item";
 export interface Slot {
   item: Item;
   quantity: number;
+  capacity: number;
 }
 
 class Inventory {
@@ -24,7 +25,8 @@ class Inventory {
   private newItem(item: Item, quantity: number = 1): Slot {
     return {
       item,
-      quantity: quantity
+      quantity: quantity,
+      capacity: 5
     };
   }
 
@@ -50,14 +52,22 @@ class Inventory {
     return false;
   }
 
+  private checkSlotCapacity(idx: number, operation: number): boolean {
+    const item = this.items[idx];
+    const check =
+      operation > 0 ? item.quantity < item.capacity : item.quantity > 0;
+
+    return check;
+  }
+
   public incrementQuantity(idx: number, by: number = 1): void {
-    if (this.items[idx]) {
+    if (this.items[idx] && this.checkSlotCapacity(idx, by)) {
       this.items[idx].quantity += by;
     }
   }
 
   public decreaseQuantity(idx: number, by: number = 1): void {
-    if (this.items[idx]) {
+    if (this.items[idx] && this.checkSlotCapacity(idx, by)) {
       this.items[idx].quantity -= by;
     }
   }
