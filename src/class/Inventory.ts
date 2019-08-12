@@ -8,6 +8,7 @@ export interface Slot {
 
 class Inventory {
   private slots: number = 4;
+  private capacity: number = 5;
   public items: Slot[] = [];
 
   public isInventoryEmpty(): boolean {
@@ -32,11 +33,11 @@ class Inventory {
     ).length;
   }
 
-  private newItem(item: Item, quantity: number = 1): Slot {
+  public newItem(item: Item, quantity: number = 1): Slot {
     return {
       item,
-      quantity: quantity,
-      capacity: 5
+      quantity: quantity > this.capacity ? this.capacity : quantity,
+      capacity: this.capacity
     };
   }
 
@@ -77,9 +78,18 @@ class Inventory {
   }
 
   public decreaseQuantity(idx: number, by: number = 1): void {
-    if (this.items[idx] && this.checkSlotCapacity(idx, by)) {
+    if (this.items[idx] && this.checkSlotCapacity(idx, by * -1)) {
       this.items[idx].quantity -= by;
     }
+  }
+
+  public getItemQuantity(idx: number): number {
+    const item = this.getItem(idx);
+    if (item) {
+      return item.quantity;
+    }
+
+    return -1;
   }
 }
 
