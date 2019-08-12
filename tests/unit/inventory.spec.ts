@@ -1,9 +1,8 @@
 import Inventory from "@/class/Inventory";
-import Item from "@/class/Item";
+import { Potion } from "../data/MockItem";
 
 describe("Inventory", () => {
   const inven = new Inventory();
-  const Potion = new Item("Potion", "UPDATE_PLAYER_HP", 100);
 
   test("Inventory is empty", () => {
     expect(inven.isInventoryEmpty()).toBeTruthy();
