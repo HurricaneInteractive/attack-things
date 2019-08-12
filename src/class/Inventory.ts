@@ -10,6 +10,10 @@ class Inventory {
   private slots: number = 4;
   public items: Slot[] = [];
 
+  public isInventoryEmpty(): boolean {
+    return this.items.length === 0;
+  }
+
   public getItem(idx: number): Slot | null {
     return this.items[idx] || null;
   }
@@ -20,6 +24,12 @@ class Inventory {
     );
 
     return empty;
+  }
+
+  public getNumberOfItems(): number {
+    return this.items.filter(
+      (item: Slot | undefined): boolean => typeof item !== "undefined"
+    ).length;
   }
 
   private newItem(item: Item, quantity: number = 1): Slot {
