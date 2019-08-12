@@ -96,7 +96,6 @@ describe("Inventory", () => {
 
   describe("New Inventory Item", () => {
     const item = inven.newItem(Potion);
-    const itemWithQuantity = inven.newItem(Potion, 5);
 
     test("Creating new item", () => {
       expect(item.item.name).toBe(Potion.name);
@@ -111,7 +110,13 @@ describe("Inventory", () => {
     });
 
     test("Item with custom quantity has the specified quantity", () => {
+      const itemWithQuantity = inven.newItem(Potion, 5);
       expect(itemWithQuantity.quantity).toBe(5);
+    });
+
+    test("Settings quantity to large number than capacity should return capacity", () => {
+      const itemWithLargeQuan = inven.newItem(Potion, 100);
+      expect(itemWithLargeQuan.quantity).toBe(5);
     });
   });
 });
