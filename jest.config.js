@@ -26,7 +26,8 @@ module.exports = {
     "!**/vendor/**",
     "!**/src/types/**",
     "!**/tests/**",
-    "<rootDir>/jest.config.js",
-    "!**/coverage/**"
+    "!<rootDir>/jest.config.js",
+    "!**/coverage/**",
+    "!<rootDir>/tests/unit/.eslintrc.js"
   ]
 };
