@@ -13,7 +13,10 @@ export default Vue.extend({
   computed: {
     inventory(): Inventory {
       return this.$store.state.player.inventory;
+    },
+    inventorySlots(): number {
+      return this.inventory.slots;
     }
   }
-})
+});
 </script>
