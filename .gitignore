@@ -19,3 +19,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Ignore test-related files
+/coverage.data
+/coverage/
