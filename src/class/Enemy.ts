@@ -2,14 +2,14 @@ import { Stats } from "@/types/store";
 
 type EnemyStats = Record<Stats, number>;
 
+export type Probability = Array<[number, number]>;
+
 class Enemy {
   public name: string;
   public image: string;
   public stats: EnemyStats;
 
   public hp: number = 100;
-  private minStat: number = 2;
-  private maxStat: number = 8;
   private availablePoints: number = 15;
 
   public constructor(name: string, image: string) {
@@ -18,10 +18,7 @@ class Enemy {
     this.stats = this.generateStats();
   }
 
-  private getRandomIntInclusive(
-    min: number = this.minStat,
-    max: number = this.maxStat
-  ): number {
+  private getRandomIntInclusive(min: number, max: number): number {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -36,6 +33,21 @@ class Enemy {
     return array;
   }
 
+  public getAvailablePoints(points: number): number {
+    return points < 0 ? 0 : points;
+  }
+
+  public setProbabilitySequence(
+    probability: Probability,
+    available: number,
+    index: number
+  ): Probability {
+    let second = probability[index][1];
+    let first = available < second ? second : available;
+    probability[index][0] = first;
+    return probability;
+  }
+
   private generateStats(): EnemyStats {
     let shuffled: Stats[] = this.shuffle([
       "attack",
@@ -43,21 +55,28 @@ class Enemy {
       "stamina",
       "magic"
     ]);
-    let stats = [];
+    let stats = new Array(shuffled.length).fill(0);
+    let probability: Probability = [[10, 5], [0, 2], [0, 1], [0, 0]];
+    let available = this.availablePoints;
 
-    for (let i = 0; i < shuffled.length; i++) {
-      let stat: number = this.getRandomIntInclusive(0, this.availablePoints);
-      this.availablePoints -= stat;
-      stats.push(stat);
-    }
+    for (let i = 0; i < stats.length; i++) {
+      const stat = this.getRandomIntInclusive(
+        probability[i][0],
+        probability[i][1]
+      );
 
-    let overTen = stats.findIndex(s => s > 10);
-    if (overTen !== -1) {
-      const val = stats[overTen];
-      const dif = val - 10;
-      let underThree = stats.findIndex(s => s < 3);
-      stats[underThree] += dif;
-      stats[overTen] = 10;
+      if (i < stats.length - 1) {
+        stats[i] = stat;
+        available -= stat;
+        available = this.getAvailablePoints(available);
+        probability = this.setProbabilitySequence(
+          probability,
+          available,
+          i + 1
+        );
+      } else {
+        stats[i] = this.getAvailablePoints(available);
+      }
     }
 
     const result: EnemyStats = {
