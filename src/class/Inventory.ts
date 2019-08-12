@@ -7,8 +7,8 @@ export interface Slot {
 }
 
 class Inventory {
-  private slots: number = 4;
-  private capacity: number = 5;
+  public slots: number = 4;
+  public capacity: number = 5;
   public items: Slot[] = [];
 
   public isInventoryEmpty(): boolean {
