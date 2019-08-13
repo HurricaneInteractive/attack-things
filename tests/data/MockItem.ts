@@ -1,6 +1,6 @@
 import Item from "@/class/Item";
 
-export const Potion: Item<{ hp: number }> = new Item(
+export const Potion: Item = new Item(
   "Potion",
   "Heals a players hp",
   "UPDATE_PLAYER_HP",
@@ -8,7 +8,7 @@ export const Potion: Item<{ hp: number }> = new Item(
   10
 );
 
-export const ManaPotion: Item<{ mp: number }> = new Item(
+export const ManaPotion: Item = new Item(
   "Mana Potion",
   "Restores a players MP",
   "UPDATE_PLAYER_HP",

@@ -1,5 +1,6 @@
 import { Potion, ManaPotion } from "../data/MockItem";
 import { MUTATIONS } from "@/types/mutations";
+import { MutationPayload } from "@/types/store";
 
 describe("Item", () => {
   it("Has a name attribute", () => {
@@ -24,7 +25,7 @@ describe("Item", () => {
 
   test("Able to consume Potion and get correct Mutation and Payload", () => {
     const mutate = MUTATIONS.UPDATE_PLAYER_HP;
-    function callback(mutation: MUTATIONS, payload: { hp: number }) {
+    function callback(mutation: MUTATIONS, payload: MutationPayload) {
       expect(mutation).toBe(mutate);
       expect(payload).toEqual({
         hp: 10

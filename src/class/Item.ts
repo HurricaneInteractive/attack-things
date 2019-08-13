@@ -1,20 +1,21 @@
 import { Mutate, MUTATIONS } from "@/types/mutations";
+import { MutationPayload } from "@/types/store";
 
-interface ItemSpec<T> {
+interface ItemSpec {
   name: string;
   description: string;
   mutates: MUTATIONS;
-  payload: T;
+  payload: MutationPayload;
   buyPrice: number;
   sellPrice?: number;
   image?: string;
 }
 
-class Item<T> implements ItemSpec<T> {
+class Item implements ItemSpec {
   public name: string;
   public description: string;
   public mutates: MUTATIONS;
-  public payload: T;
+  public payload: any;
   public buyPrice: number;
   public sellPrice: number;
   public image: string;
@@ -23,7 +24,7 @@ class Item<T> implements ItemSpec<T> {
     name: string,
     description: string,
     mutates: Mutate,
-    payload: T,
+    payload: MutationPayload,
     buyPrice: number,
     sellPrice: number = -1,
     image: string = ""
@@ -45,7 +46,9 @@ class Item<T> implements ItemSpec<T> {
     return "@/assets/item.svg";
   }
 
-  public consume(fn: (mutation: MUTATIONS, payload: T) => void): void {
+  public consume(
+    fn: (mutation: MUTATIONS, payload: MutationPayload) => void
+  ): void {
     fn(this.mutates, this.payload);
   }
 }

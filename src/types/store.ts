@@ -8,9 +8,14 @@ export interface Player {
   gold: number;
   inventory: Inventory;
   hp: number;
+  mp: number;
 }
 
 export interface RootState {
   player: Player;
   currentLvl: number;
 }
+
+export type MutationPayload = {
+  readonly [P in keyof Player]?: Player[P];
+};
