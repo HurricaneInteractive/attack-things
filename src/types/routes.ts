@@ -1,4 +1,5 @@
 export enum ROUTES {
   HOME = "/",
-  STATS = "/stats"
+  STATS = "/stats",
+  SHOP = "/shop"
 }

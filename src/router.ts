@@ -19,6 +19,12 @@ export default new Router({
       name: "stats",
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/Stats.vue")
+    },
+    {
+      path: ROUTES.SHOP,
+      name: "shop",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/Shop.vue")
     }
   ]
 });
