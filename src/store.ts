@@ -17,7 +17,8 @@ const store: StoreOptions<RootState> = {
       },
       gold: 100,
       inventory: new Inventory(),
-      hp: 100
+      hp: 100,
+      mp: 100
     },
     currentLvl: 1
   },
