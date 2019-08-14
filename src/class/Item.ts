@@ -1,10 +1,10 @@
-import { Mutate, MUTATIONS } from "@/types/mutations";
+import { MUTATIONS } from "@/types/mutations";
 import { MutationPayload } from "@/types/store";
 
-interface ItemSpec {
+export interface ItemSpec {
   name: string;
   description: string;
-  mutates: MUTATIONS;
+  mutates: keyof typeof MUTATIONS;
   payload: MutationPayload;
   buyPrice: number;
   sellPrice?: number;
@@ -14,23 +14,23 @@ interface ItemSpec {
 class Item implements ItemSpec {
   public name: string;
   public description: string;
-  public mutates: MUTATIONS;
+  public mutates: keyof typeof MUTATIONS;
   public payload: any;
   public buyPrice: number;
   public sellPrice: number;
   public image: string;
 
-  public constructor(
-    name: string,
-    description: string,
-    mutates: Mutate,
-    payload: MutationPayload,
-    buyPrice: number,
-    sellPrice: number = -1,
-    image: string = ""
-  ) {
+  public constructor({
+    name,
+    description,
+    mutates,
+    payload,
+    buyPrice,
+    sellPrice = -1,
+    image = ""
+  }: ItemSpec) {
     this.name = name;
-    this.mutates = MUTATIONS[mutates];
+    this.mutates = mutates;
     this.buyPrice = buyPrice;
     this.payload = payload;
     this.description = description;
@@ -49,7 +49,7 @@ class Item implements ItemSpec {
   public consume(
     fn: (mutation: MUTATIONS, payload: MutationPayload) => void
   ): void {
-    fn(this.mutates, this.payload);
+    fn(MUTATIONS[this.mutates], this.payload);
   }
 }
 
